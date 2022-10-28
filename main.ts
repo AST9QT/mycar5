@@ -26,6 +26,11 @@ let X = 0
 let right_forward = 0
 let left_forward = 0
 let addForward = 0
+let moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+let head_led = moveMotorZIP.range(0, 2)
+let back_led = moveMotorZIP.range(2, 4)
+head_led.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.White))
+back_led.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
 let blink_zip = 0
 addForward = 15
 left_forward = 0
@@ -50,15 +55,6 @@ basic.showLeds(`
     . . . . .
     . . . . .
     `)
-let moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(0)
-moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
-moveMotorZIP.setBrightness(255)
-for (let index = 0; index < 4; index++) {
-    moveMotorZIP.show()
-    basic.pause(500)
-    moveMotorZIP.clear()
-    basic.pause(500)
-}
 basic.forever(function () {
     if (left_forward == 0 && right_forward == 0) {
         Kitronik_Move_Motor.stop()
@@ -67,7 +63,4 @@ basic.forever(function () {
         Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Forward, right_forward)
     }
     basic.pause(200)
-})
-basic.forever(function () {
-	
 })
